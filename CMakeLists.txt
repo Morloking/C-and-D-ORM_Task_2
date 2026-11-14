@@ -20,6 +20,8 @@ models/shop.h
 models/stock.h
 models/sale.h
 models/general_models.h
+orm_manager.h
+orm_manager.cpp
 )
 
 target_link_libraries(homework_orm_2 PRIVATE

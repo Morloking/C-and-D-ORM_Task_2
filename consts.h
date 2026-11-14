@@ -54,6 +54,45 @@ namespace consts {
 	}
 	namespace messages {
 		inline constexpr std::string_view kTablesCreated = "Tables created successfully.\n";
-		inline constexpr std::string_view kPressEnter = "\nPress Enter to exit...";
+		inline constexpr std::string_view kPublisherNotFound = "Publisher not found.\n";
+		inline constexpr std::string_view kNoShopsFound = "No shops found selling books by this publisher.\n";
+		inline constexpr std::string_view kShopsHeader = "Shops selling books by this publisher:\n";
+
+		inline constexpr std::string_view kDataFilled = "Data filled successfully.\n";
+		inline constexpr std::string_view kEnterPublisher = "Enter publisher name or ID: ";
+	}
+	namespace sql_conditions {
+		inline constexpr std::string_view kById = "id = ?";
+		inline constexpr std::string_view kByName = "name = ?";
+	}
+	namespace test_data {
+		// Publishers
+		inline constexpr std::string_view kPubEksmo = "Eksmo";
+		inline constexpr std::string_view kPubAst = "AST";
+		inline constexpr std::string_view kPubAzbooka = "Azbooka-Atticus";
+		// Books
+		inline constexpr std::string_view kBookMaster = "Master and Margarita";
+		inline constexpr std::string_view kBookCrime = "Crime and Punishment";
+		inline constexpr std::string_view kBookChairs = "The Twelve Chairs";
+		// Shops
+		inline constexpr std::string_view kShopChitai = "Chitai-Gorod";
+		inline constexpr std::string_view kShopBukvoed = "Bukvoed";
+		inline constexpr std::string_view kShopMoscow = "Moscow House of Books";
+		// Dates for sales
+		inline constexpr std::string_view kDateNov1 = "2023-11-01";
+		inline constexpr std::string_view kDateNov2 = "2023-11-02";
+		inline constexpr std::string_view kDateNov3 = "2023-11-03";
+		// Counts for Stock
+		inline constexpr int kStockCount1 = 15;
+		inline constexpr int kStockCount2 = 20;
+		inline constexpr int kStockCount3 = 10;
+		// Prices for Sales
+		inline constexpr double kSalePrice1 = 850.50;
+		inline constexpr double kSalePrice2 = 720.00;
+		inline constexpr double kSalePrice3 = 1100.00;
+		// Counts for Sales
+		inline constexpr int kSaleCount1 = 2;
+		inline constexpr int kSaleCount2 = 1;
+		inline constexpr int kSaleCount3 = 3;
 	}
 }

@@ -44,5 +44,5 @@ cmake --build build --config Release
 
 After building, run the executable:
 ```bash
-.\build\Release\homework_orm.exe
+.\build\Release\homework_orm_2.exe
 ```

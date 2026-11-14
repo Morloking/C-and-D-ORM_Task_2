@@ -1,14 +1,9 @@
 #include <exception>
 #include <iostream>
-#include <memory>
 #include <string>
 
-#include <Wt/Dbo/Dbo.h>
-#include <Wt/Dbo/backend/Postgres.h>
-
 #include "consts.h"
-#include "general_models.h"
-
+#include "orm_manager.h"
 int main() {
 	std::string conn_str;
 	conn_str += consts::db_config::kHostKey;
@@ -27,40 +22,21 @@ int main() {
 	conn_str += consts::db_config::kPassword;
 
 	try {
-		auto backend_postgres = std::make_unique<Wt::Dbo::backend::Postgres>(conn_str);
-
-		Wt::Dbo::Session session;
-		session.setConnection(std::move(backend_postgres));
-
-		session.mapClass<models::Publisher>(
-			consts::db_tables::kPublisherTable.data());
-		session.mapClass<models::Book>(
-			consts::db_tables::kBookTable.data());
-		session.mapClass<models::Shop>(
-			consts::db_tables::kShopTable.data());
-		session.mapClass<models::Stock>(
-			consts::db_tables::kStockTable.data());
-		session.mapClass<models::Sale>(
-			consts::db_tables::kSaleTable.data());
-
-		Wt::Dbo::Transaction transaction(session);
-		session.createTables();
-		transaction.commit();
-
-		std::cout << consts::messages::kTablesCreated;
-	}
-	catch (const Wt::Dbo::Exception& e) {
-		std::cerr << consts::errors::kDboErrorMsg << e.what()
-			<< consts::errors::kCodeMsg << e.code() << "\n";
-		return 1;
+		core::OrmManager manager(conn_str);
+		manager.CreateTables();
+		manager.FillTables();
+		std::string user_input;
+		std::cout << consts::messages::kEnterPublisher;
+		std::getline(std::cin >> std::ws, user_input);
+		std::cout << manager.FindShopsByPublisher(user_input) << "\n";
 	}
 	catch (const std::exception& e) {
-		std::cerr << consts::errors::kStandardErrorMsg << e.what() << "\n";
-		return 2;
+		std::cerr << e.what() << "\n";
+		return 1;
 	}
 	catch (...) {
-		std::cerr << consts::errors::kUnknownErrorMsg << "\n";
-		return 3;
+		std::cerr << consts::errors::kUnknownErrorMsg;
+		return 2;
 	}
 	return 0;
 }
